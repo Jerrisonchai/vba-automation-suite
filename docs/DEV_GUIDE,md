@@ -1,0 +1,71 @@
+# Developer Guide – VBA Automation Suite
+
+## Purpose
+This guide is for developers who maintain or extend the macros in this repository.  
+It explains the coding standards, module structure, and best practices for adding or updating features.
+
+---
+
+## Development Environment
+
+- **Microsoft Excel (2016/2019/2021/365)** with Developer tab enabled.
+- **Microsoft Outlook (Desktop)** for email-related modules.
+- **VBA Editor (VBE)** as the coding environment.
+- **GitHub Desktop** (or Git CLI) for version control.
+- **Trusted Location** set for macros (`File > Options > Trust Center`).
+
+---
+
+## Repository Structure
+
+- **Download_attachments** → Outlook attachment handling.
+- **hide-unhide-delete-hidden-column** → Excel performance utilities.
+- **Loopfiles-Analyse-Print** → File looping & reporting.
+- **testing-for-Gemini-API** → API integration demo.
+- **Bulk_signature-ISO** → ISO compliance macros.
+- **Lock-or-unlock-VB-Project-ISO** → Project security utilities.
+- **Push-updates-to-templates-ISO** → VBA version control.
+- **PushProject2Production-ISO** → Deployment automation.
+
+---
+
+## Coding Standards
+
+- **Naming**
+  - Procedures: `CamelCase` (e.g., `UpdateFOC`)
+  - Variables: descriptive (e.g., `lastRow`, `startTime`)
+  - Constants: ALL_CAPS (e.g., `API_KEY`)
+
+- **Error Handling**
+  ```vba
+  On Error GoTo ErrHandler
+  
+  ' your code
+  
+  Exit Sub
+  ErrHandler:
+      MsgBox "Error: " & Err.Description
+  ```
+- Logging
+  - Where possible, log actions to a hidden sheet (Status, Start_Time, Time_Taken, UserName).
+- Reusable Functions
+  - Place shared logic in a Utilities module.
+  - Avoid duplicating loops across multiple macros.
+
+## Contribution Workflow
+1. Fork the repo (if external) or create a new branch (if internal). 
+2. Name branches clearly (e.g., feature/outlook-download, fix/column-unhide).
+3. Test locally on sample files before pushing.
+Submit pull requests with a short description of the change.
+
+## Testing Checklist
+- Macro runs without runtime errors.
+- Handles edge cases (empty folder, missing attachments, hidden columns).
+- Compatible with both .xlsm templates and raw data sheets. 
+- API keys are not hardcoded before committing.
+- ISO scripts maintain compliance wording and lock policies.
+
+## Security Notes
+- Do not commit API keys or personal email IDs.
+- Ensure macros are locked before release to production.
+- Use GitHub Secrets if integrating CI/CD in the future.
